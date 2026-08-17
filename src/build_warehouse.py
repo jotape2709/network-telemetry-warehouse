@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import timedelta
 from pathlib import Path
 
 import duckdb
@@ -24,7 +25,7 @@ def load_raw(raw_dir: Path) -> dict[str, pd.DataFrame]:
 def register_raw(connection: duckdb.DuckDBPyConnection, tables: dict[str, pd.DataFrame], start: pd.Timestamp, end: pd.Timestamp) -> None:
     for name, frame in tables.items():
         connection.register(f"raw_{name}", frame)
-    raw_dates = pd.DataFrame({"full_date": pd.date_range(start.normalize(), end.normalize() - pd.Timedelta(days=1), freq="D")})
+    raw_dates = pd.DataFrame({"full_date": pd.date_range(start.normalize(), end.normalize() - timedelta(days=1), freq="D")})
     connection.register("raw_dates", raw_dates)
 
 
@@ -146,7 +147,7 @@ def build_warehouse(root: Path) -> tuple[dict[str, object], dict[str, object]]:
     connection = duckdb.connect(str(warehouse_dir / "network_telemetry.duckdb"))
     try:
         start = tables["flows"]["observed_at"].min()
-        end = tables["flows"]["observed_at"].max() + pd.Timedelta(days=1)
+        end = tables["flows"]["observed_at"].max() + timedelta(days=1)
         register_raw(connection, tables, start, end)
         execute_sql_files(connection, root / "sql")
         quality = quality_checks(connection, len(tables["flows"]), len(tables["incidents"]), root / "sql")
@@ -165,4 +166,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

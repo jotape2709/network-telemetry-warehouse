@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import timedelta
 from pathlib import Path
 
 import numpy as np
@@ -55,7 +56,7 @@ def device_tables(config: GenerationConfig, rng: np.random.Generator) -> tuple[p
     for row in devices.itertuples(index=False):
         old_version = f"{rng.integers(7, 10)}.{rng.integers(0, 5)}"
         if row.device_id in changed:
-            change_at = start + pd.Timedelta(days=int(rng.integers(28, (end - start).days - 12)))
+            change_at = start + timedelta(days=int(rng.integers(28, (end - start).days - 12)))
             major, minor = old_version.split(".")
             new_version = f"{major}.{int(minor) + 1}"
             rows.append((row.device_id, row.device_type, row.site_key, row.vendor, old_version, start, change_at, False))
@@ -158,4 +159,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
