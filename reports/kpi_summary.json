@@ -1,0 +1,13 @@
+{
+  "flows": 120000,
+  "traffic_tb": 0.1467,
+  "avg_latency_ms": 17.1497,
+  "p95_latency_ms": 35.3699,
+  "avg_packet_loss_pct": 0.8629,
+  "sla_risk_rate": 0.308108,
+  "incidents": 220,
+  "downtime_minutes": 15531.0,
+  "incident_day_latency_ms": 39.3689,
+  "clean_day_latency_ms": 16.4611,
+  "incident_day_latency_lift": 1.391629
+}

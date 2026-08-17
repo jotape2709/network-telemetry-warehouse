@@ -1,0 +1,19 @@
+{
+  "all_passed": true,
+  "reconciliation": {
+    "raw_flows": 120000,
+    "warehouse_flows": 120000,
+    "raw_incidents": 220,
+    "warehouse_incidents": 220
+  },
+  "failure_counts": {
+    "flow_primary_key_duplicates": 0,
+    "incident_primary_key_duplicates": 0,
+    "flow_orphan_device": 0,
+    "flow_orphan_site": 0,
+    "flow_orphan_protocol": 0,
+    "invalid_measure_bounds": 0,
+    "multiple_current_device_rows": 0,
+    "overlapping_device_versions": 0
+  }
+}

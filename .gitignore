@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+data/raw/*.csv
+warehouse/*.duckdb
+warehouse/*.wal
+.env
+.DS_Store
+
